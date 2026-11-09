@@ -152,9 +152,9 @@ const alt = (kind: string) => `${kind} screenshot of ${describeEntry(props.entry
         </ScaledStage>
       </figure>
       <nav class="viewer__regions" aria-label="Changed regions">
-        <h3 class="viewer__regions-title">
+        <h2 class="viewer__regions-title">
           {{ regions.length }} changed {{ regions.length === 1 ? 'region' : 'regions' }}
-        </h3>
+        </h2>
         <ol>
           <li v-for="(r, i) in regions" :key="i">
             <button

@@ -20,7 +20,7 @@ const thumb = (e: ReportEntry) => imageUrl(source.url, e, 'current') ?? imageUrl
     title="No snapshots match"
     description="Try another status or clear the search."
   />
-  <div v-else class="table" role="region" aria-label="Snapshots" tabindex="0">
+  <div v-else class="table" role="region" aria-label="Snapshot table" tabindex="0">
     <table>
       <thead>
         <tr>
