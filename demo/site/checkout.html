@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkout · Lumen Supply</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="layout.js"></script>
+  </head>
+  <body>
+    <div class="promo">Free shipping on orders over $50 this week</div>
+    <header>
+      <strong>Lumen Supply</strong>
+      <nav>
+        <a href="index.html">Shop</a><a href="pricing.html">Plans</a><a href="checkout.html">Checkout</a
+        ><a href="components.html">UI kit</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Checkout</h1>
+      <p class="lead">Two lamps, ships in 2 days.</p>
+      <form>
+        <label>Email<input type="email" value="sam@example.com" /></label>
+        <label
+          >Card number<input inputmode="numeric" value="1234 5678 9012 345" /><span class="error"
+            >Card number looks incomplete.</span
+          ></label
+        >
+        <label>Postcode<input value="94107" /></label>
+        <div class="stack">
+          <button class="btn" type="button">Pay $153</button
+          ><button class="btn secondary" type="button">Back to cart</button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

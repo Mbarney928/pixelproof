@@ -2,7 +2,8 @@ dist
 coverage
 storybook-static
 .pixelproof
-apps/review/public/demo-report
+apps/review/public/report
+.pixelproof-demo
 playwright-report
 test-results
 .lighthouseci

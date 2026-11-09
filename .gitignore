@@ -11,7 +11,8 @@ blob-report/
 
 # pixelproof runs (screenshots are generated, never committed)
 .pixelproof/
-apps/review/public/demo-report/
+apps/review/public/report/
+.pixelproof-demo/
 
 # Secrets and local configuration
 .env
