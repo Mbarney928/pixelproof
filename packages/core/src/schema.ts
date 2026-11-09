@@ -42,7 +42,7 @@ export const RegionSchema = z.object({
 /** Relative paths (inside the report folder) to the images for one snapshot. */
 const ImagePath = z
   .string()
-  .regex(/^(baseline|current|diff)\/[a-z0-9-]+\.png$/, 'Image paths stay inside the report folder');
+  .regex(/^(baseline|current|diff|thumb)\/[a-z0-9-]+\.png$/, 'Image paths stay inside the report folder');
 
 export const ReportEntrySchema = z.object({
   id: SnapshotIdSchema,
@@ -68,6 +68,8 @@ export const ReportEntrySchema = z.object({
     baseline: ImagePath.optional(),
     current: ImagePath.optional(),
     diff: ImagePath.optional(),
+    /** Small preview of the top of the page, for lists. */
+    thumb: ImagePath.optional(),
   }),
 });
 

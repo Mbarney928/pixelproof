@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-import { compareSnapshot } from '@pixelproof/core';
+import { compareSnapshot, decodePng, encodePng, thumbnail } from '@pixelproof/core';
 import { REPORT_VERSION, ReportSchema, type Report, type ReportEntry } from '@pixelproof/core/schema';
 
 import type { Config } from './config.js';
@@ -10,6 +10,9 @@ import { UserError } from './errors.js';
 import type { Logger } from './logger.js';
 import { readManifest, type ManifestEntry } from './manifest.js';
 import { VERSION } from './version.js';
+
+/** Preview size: the 72×48 list thumbnail at 2× for sharp displays. */
+const THUMB = { width: 144, height: 96 };
 
 export const paths = (config: Config) => ({
   baseline: join(config.dir, 'baseline'),
@@ -44,7 +47,8 @@ export async function compareRun(
   if (!baseline) logger.warn('No baseline yet: every snapshot will be reported as new', { dir: p.baseline });
 
   await rm(p.report, { recursive: true, force: true });
-  for (const sub of ['baseline', 'current', 'diff']) await mkdir(join(p.report, sub), { recursive: true });
+  for (const sub of ['baseline', 'current', 'diff', 'thumb'])
+    await mkdir(join(p.report, sub), { recursive: true });
 
   const baselineById = new Map((baseline?.entries ?? []).map((e) => [e.id, e]));
   const currentIds = new Set(current.entries.map((e) => e.id));
@@ -83,6 +87,15 @@ export async function compareRun(
     if (result.diffPng) {
       await writeFile(join(p.report, 'diff', `${meta.id}.png`), result.diffPng);
       images.diff = `diff/${meta.id}.png`;
+    }
+    // Lists show a small preview instead of downloading every full-size screenshot.
+    const preview = curPng ?? basePng;
+    if (preview) {
+      await writeFile(
+        join(p.report, 'thumb', `${meta.id}.png`),
+        encodePng(thumbnail(decodePng(preview), THUMB.width, THUMB.height)),
+      );
+      images.thumb = `thumb/${meta.id}.png`;
     }
     entries.push({
       id: meta.id,

@@ -90,3 +90,43 @@ export function fillRects(
 export function cloneImage(image: RgbaImage): RgbaImage {
   return { width: image.width, height: image.height, data: new Uint8Array(image.data) };
 }
+
+/**
+ * A small preview of the top of a screenshot: crops to the target aspect ratio from the top edge, then
+ * area-averages (box filter) down to `width`×`height`, so thin text and borders blend instead of vanishing.
+ */
+export function thumbnail(image: RgbaImage, width: number, height: number): RgbaImage {
+  const cropH = Math.min(image.height, Math.round((image.width * height) / width));
+  const cropW = Math.min(image.width, Math.round((cropH * width) / height));
+  const out = createImage(width, height);
+  const sx = cropW / width;
+  const sy = cropH / height;
+  for (let y = 0; y < height; y++) {
+    const y0 = Math.floor(y * sy);
+    const y1 = Math.max(y0 + 1, Math.floor((y + 1) * sy));
+    for (let x = 0; x < width; x++) {
+      const x0 = Math.floor(x * sx);
+      const x1 = Math.max(x0 + 1, Math.floor((x + 1) * sx));
+      let r = 0;
+      let g = 0;
+      let b = 0;
+      let a = 0;
+      for (let yy = y0; yy < y1; yy++) {
+        for (let xx = x0; xx < x1; xx++) {
+          const i = (yy * image.width + xx) * 4;
+          r += image.data[i] ?? 0;
+          g += image.data[i + 1] ?? 0;
+          b += image.data[i + 2] ?? 0;
+          a += image.data[i + 3] ?? 0;
+        }
+      }
+      const n = (y1 - y0) * (x1 - x0);
+      const o = (y * width + x) * 4;
+      out.data[o] = Math.round(r / n);
+      out.data[o + 1] = Math.round(g / n);
+      out.data[o + 2] = Math.round(b / n);
+      out.data[o + 3] = Math.round(a / n);
+    }
+  }
+  return out;
+}

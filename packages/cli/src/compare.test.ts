@@ -1,6 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { decodePng } from '@pixelproof/core';
 import { ReportSchema } from '@pixelproof/core/schema';
 import { describe, expect, it } from 'vitest';
 
@@ -44,6 +45,7 @@ describe('compareRun', () => {
       baseline: 'baseline/tweaked.png',
       current: 'current/tweaked.png',
       diff: 'diff/tweaked.png',
+      thumb: 'thumb/tweaked.png',
     });
 
     const onDisk = ReportSchema.parse(JSON.parse(await readFile(join(dir, 'report', 'report.json'), 'utf8')));
@@ -59,6 +61,15 @@ describe('compareRun', () => {
       'same.png',
       'tweaked.png',
     ]);
+    // Every snapshot gets a list preview, taken from the current image or (when removed) the baseline.
+    expect((await readdir(join(dir, 'report', 'thumb'))).sort()).toEqual([
+      'fresh.png',
+      'gone.png',
+      'same.png',
+      'tweaked.png',
+    ]);
+    const thumb = decodePng(await readFile(join(dir, 'report', 'thumb', 'gone.png')));
+    expect([thumb.width, thumb.height]).toEqual([144, 96]);
   });
 
   it('reports everything as new when there is no baseline yet', async () => {

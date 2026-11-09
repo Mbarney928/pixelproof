@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { createImage, decodePng, encodePng, fillRects, padImage } from './image.js';
+import { createImage, decodePng, encodePng, fillRects, padImage, thumbnail } from './image.js';
 import { BLUE, canvas } from './test-utils.js';
 
 describe('image helpers', () => {
@@ -28,5 +28,22 @@ describe('image helpers', () => {
     for (let p = 0; p < 16; p++) if (img.data[p * 4] === 0) painted.push(p);
     // Columns 2-3 of row 0 (x from floor(2.5)=2, y clipped to 0..1).
     expect(painted).toEqual([2, 3]);
+  });
+
+  it('makes a thumbnail of the top of the page by averaging pixels', () => {
+    // 40×80 page: top half white, bottom half black. A 4×2 thumbnail crops to the top 40×20.
+    const page = createImage(40, 80, [255, 255, 255, 255]);
+    fillRects(page, [{ x: 0, y: 40, width: 40, height: 40 }], [0, 0, 0, 255]);
+    const small = thumbnail(page, 4, 2);
+    expect([small.width, small.height]).toEqual([4, 2]);
+    expect([...small.data.subarray(0, 4)]).toEqual([255, 255, 255, 255]);
+
+    // A 1px black line in a 10px block averages to grey instead of disappearing.
+    const lined = createImage(20, 20, [255, 255, 255, 255]);
+    fillRects(lined, [{ x: 0, y: 4, width: 20, height: 1 }], [0, 0, 0, 255]);
+    expect(thumbnail(lined, 2, 2).data[0]).toBe(230);
+
+    // A short, wide image is cropped horizontally instead.
+    expect(thumbnail(createImage(100, 10), 4, 2).width).toBe(4);
   });
 });

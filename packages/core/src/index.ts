@@ -8,6 +8,7 @@ export {
   encodePng,
   fillRects,
   padImage,
+  thumbnail,
   type Rect,
   type RgbaImage,
 } from './image.js';

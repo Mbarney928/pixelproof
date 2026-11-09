@@ -11,7 +11,10 @@ import { Badge, EmptyState } from '@/shared/ui';
 defineProps<{ entries: readonly ReportEntry[]; linkFor: (id: string) => RouteLocationRaw }>();
 const source = useReportSource();
 const review = useReviewStore();
-const thumb = (e: ReportEntry) => imageUrl(source.url, e, 'current') ?? imageUrl(source.url, e, 'baseline');
+const thumb = (e: ReportEntry) =>
+  imageUrl(source.url, e, 'thumb') ??
+  imageUrl(source.url, e, 'current') ??
+  imageUrl(source.url, e, 'baseline');
 </script>
 
 <template>

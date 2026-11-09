@@ -48,7 +48,10 @@ export default defineConfigWithVueTs(
       // A control may be nested in its label or linked by id; either is accessible.
       'vuejs-accessibility/label-has-for': ['error', { required: { some: ['nesting', 'id'] } }],
       // Design-system primitives (Button, Card, Badge…) are conventionally single words.
-      'vue/multi-word-component-names': ['error', { ignores: ['Badge', 'Button', 'Card', 'Kbd', 'Skeleton'] }],
+      'vue/multi-word-component-names': [
+        'error',
+        { ignores: ['Badge', 'Button', 'Card', 'Kbd', 'Skeleton'] },
+      ],
     },
   },
   // Feature-sliced layers: each layer may import only from layers below it.
