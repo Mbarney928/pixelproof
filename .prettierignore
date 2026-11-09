@@ -1,0 +1,9 @@
+dist
+coverage
+storybook-static
+.pixelproof
+apps/review/public/demo-report
+playwright-report
+test-results
+.lighthouseci
+package-lock.json

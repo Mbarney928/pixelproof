@@ -1,0 +1,30 @@
+{
+  "name": "@pixelproof/core",
+  "version": "0.1.0",
+  "description": "Image diff engine for visual regression testing: anti-aliasing aware pixel diff, region clustering, SSIM and classification.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "import": "./dist/schema.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "pixelmatch": "8.0.0",
+    "pngjs": "7.0.0",
+    "zod": "4.6.7"
+  }
+}

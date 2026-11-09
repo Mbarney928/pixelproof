@@ -1,0 +1,55 @@
+{
+  "name": "pixelproof-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/core",
+    "packages/cli",
+    "apps/review"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "npm run build -w @pixelproof/core -w @pixelproof/cli && npm run build -w @pixelproof/review",
+    "typecheck": "npm run build -w @pixelproof/core && npm run typecheck -w @pixelproof/core -w @pixelproof/cli -w @pixelproof/review",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "demo": "node scripts/demo.js",
+    "e2e": "playwright test",
+    "storybook": "npm run storybook -w @pixelproof/review",
+    "build-storybook": "npm run build-storybook -w @pixelproof/review",
+    "size:check": "node scripts/check-bundle-size.js",
+    "lighthouse": "lhci autorun"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@eslint/js": "10.0.1",
+    "@lhci/cli": "0.16.0",
+    "@playwright/test": "1.65.0",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/user-event": "14.6.8",
+    "@types/node": "22.19.1",
+    "@types/pngjs": "6.0.5",
+    "@vitest/coverage-v8": "5.1.0",
+    "@vue/eslint-config-typescript": "14.9.0",
+    "axe-core": "4.14.0",
+    "eslint": "10.14.0",
+    "eslint-import-resolver-typescript": "4.4.5",
+    "eslint-plugin-boundaries": "7.4.2",
+    "eslint-plugin-vue": "10.12.0",
+    "eslint-plugin-vuejs-accessibility": "2.6.3",
+    "globals": "17.14.0",
+    "jsdom": "31.0.0",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vitest": "5.1.0"
+  },
+  "overrides": {
+    "basic-ftp": "6.2.6"
+  }
+}
