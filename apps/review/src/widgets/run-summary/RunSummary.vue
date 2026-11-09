@@ -65,6 +65,7 @@ const tiles = computed(() =>
 .summary__tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  align-content: start;
   gap: var(--space-3);
   margin: 0;
 }
