@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "npm run build -w @pixelproof/core -w @pixelproof/cli && npm run build -w @pixelproof/review",
-    "typecheck": "npm run build -w @pixelproof/core && npm run typecheck -w @pixelproof/core -w @pixelproof/cli -w @pixelproof/review",
+    "typecheck": "npm run build -w @pixelproof/core && npm run typecheck -w @pixelproof/core -w @pixelproof/cli -w @pixelproof/review && tsc -p tsconfig.json",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
