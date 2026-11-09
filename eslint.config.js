@@ -90,6 +90,6 @@ export default defineConfigWithVueTs(
   },
   {
     files: ['**/*.js'],
-    ...vueTsConfigs.disableTypeChecked,
+    extends: [vueTsConfigs.disableTypeChecked],
   },
 );
