@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
 import boundaries from 'eslint-plugin-boundaries';
 import pluginVue from 'eslint-plugin-vue';
@@ -44,6 +45,10 @@ export default defineConfigWithVueTs(
       'vue/component-api-style': ['error', ['script-setup']],
       'vue/define-props-declaration': ['error', 'type-based'],
       'vue/require-default-prop': 'off',
+      // A control may be nested in its label or linked by id; either is accessible.
+      'vuejs-accessibility/label-has-for': ['error', { required: { some: ['nesting', 'id'] } }],
+      // Design-system primitives (Button, Card, Badge…) are conventionally single words.
+      'vue/multi-word-component-names': ['error', { ignores: ['Badge', 'Button', 'Card', 'Kbd', 'Skeleton'] }],
     },
   },
   // Feature-sliced layers: each layer may import only from layers below it.
@@ -51,7 +56,7 @@ export default defineConfigWithVueTs(
     files: [`${REVIEW}/**/*.{ts,vue}`],
     plugins: { boundaries },
     settings: {
-      'boundaries/elements': layers.map((type) => ({ type, pattern: `${REVIEW}/${type}/*`, mode: 'folder' })),
+      'boundaries/elements': layers.map((type) => ({ type, pattern: `${REVIEW}/${type}/*` })),
       'boundaries/include': [`${REVIEW}/**/*`],
       'import/resolver': { typescript: { project: 'apps/review/tsconfig.app.json' } },
     },
@@ -61,8 +66,8 @@ export default defineConfigWithVueTs(
         {
           default: 'disallow',
           policies: layers.map((from, i) => ({
-            from: { type: from },
-            allow: { to: { type: layers.slice(i) } },
+            from: { element: { type: from } },
+            allow: { to: { element: { type: layers.slice(i) } } },
           })),
         },
       ],
@@ -92,4 +97,6 @@ export default defineConfigWithVueTs(
     files: ['**/*.js'],
     extends: [vueTsConfigs.disableTypeChecked],
   },
+  // Prettier owns formatting.
+  skipFormatting,
 );

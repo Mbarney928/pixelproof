@@ -1,0 +1,105 @@
+/* pixelproof design tokens. Dark mode follows the OS unless the user picks a theme ([data-theme]). */
+:root {
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 650;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-1: 0 1px 2px rgb(20 18 40 / 0.06), 0 1px 3px rgb(20 18 40 / 0.08);
+  --focus-ring: 0 0 0 3px var(--color-focus);
+
+  --color-bg: #f6f6f9;
+  --color-surface: #ffffff;
+  --color-surface-2: #eeeef4;
+  --color-border: #dcdce6;
+  --color-text: #17161f;
+  --color-text-secondary: #4d4b5c;
+  --color-accent: #5b4fd6;
+  --color-accent-hover: #4a3fc0;
+  --color-accent-soft: #ebe9fc;
+  --color-on-accent: #ffffff;
+  --color-focus: #8b80f0;
+  /* Single data series (validated for contrast and colour-vision deficiency). */
+  --color-series-1: #2a78d6;
+  /* Status colours are reserved for status and always ship with an icon and a label. */
+  --color-good-bg: #e3f5ea;
+  --color-good-ink: #17643a;
+  --color-info-bg: #e3eefc;
+  --color-info-ink: #1d4f9c;
+  --color-warning-bg: #fdf0d8;
+  --color-warning-ink: #7a4600;
+  --color-critical-bg: #fde4e6;
+  --color-critical-ink: #a3182b;
+  --color-diff: #e6143c;
+  --checker-a: #f1f1f5;
+  --checker-b: #e4e4ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #121218;
+    --color-surface: #1b1b23;
+    --color-surface-2: #262632;
+    --color-border: #363645;
+    --color-text: #ececf3;
+    --color-text-secondary: #b4b2c4;
+    --color-accent: #a59bff;
+    --color-accent-hover: #bbb3ff;
+    --color-accent-soft: #2c2850;
+    --color-on-accent: #14121f;
+    --color-focus: #a59bff;
+    --color-series-1: #3987e5;
+    --color-good-bg: #15301f;
+    --color-good-ink: #9fdcb4;
+    --color-info-bg: #172741;
+    --color-info-ink: #a8c8f5;
+    --color-warning-bg: #36280f;
+    --color-warning-ink: #f2cd8a;
+    --color-critical-bg: #3c171d;
+    --color-critical-ink: #ffadb7;
+    --color-diff: #ff5d73;
+    --checker-a: #1e1e27;
+    --checker-b: #262632;
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #121218;
+  --color-surface: #1b1b23;
+  --color-surface-2: #262632;
+  --color-border: #363645;
+  --color-text: #ececf3;
+  --color-text-secondary: #b4b2c4;
+  --color-accent: #a59bff;
+  --color-accent-hover: #bbb3ff;
+  --color-accent-soft: #2c2850;
+  --color-on-accent: #14121f;
+  --color-focus: #a59bff;
+  --color-series-1: #3987e5;
+  --color-good-bg: #15301f;
+  --color-good-ink: #9fdcb4;
+  --color-info-bg: #172741;
+  --color-info-ink: #a8c8f5;
+  --color-warning-bg: #36280f;
+  --color-warning-ink: #f2cd8a;
+  --color-critical-bg: #3c171d;
+  --color-critical-ink: #ffadb7;
+  --color-diff: #ff5d73;
+  --checker-a: #1e1e27;
+  --checker-b: #262632;
+}
