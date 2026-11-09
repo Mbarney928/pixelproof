@@ -1,7 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "rootDir": "src", "outDir": "dist", "types": ["node"] },
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": ["node"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"]
+  },
   "include": ["src"],
   "exclude": ["src/**/*.test.ts", "src/test-utils.ts", "src/test/**"],
-  "references": [{ "path": "../core/tsconfig.build.json" }]
+  "references": [
+    {
+      "path": "../core/tsconfig.build.json"
+    }
+  ]
 }
