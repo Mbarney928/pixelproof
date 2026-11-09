@@ -235,9 +235,7 @@ describe('loading and errors', () => {
     let calls = 0;
     await renderApp('/', () => {
       calls += 1;
-      return calls === 1
-        ? Promise.reject(new TypeError('offline'))
-        : fakeFetch(sampleReport())(REPORT_URL);
+      return calls === 1 ? Promise.reject(new TypeError('offline')) : fakeFetch(sampleReport())(REPORT_URL);
     });
     await user.click(await screen.findByRole('button', { name: /Try again/i }));
     expect(await screen.findByRole('heading', { name: 'Visual review' })).toBeInTheDocument();
