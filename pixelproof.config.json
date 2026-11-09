@@ -1,0 +1,21 @@
+{
+  "dir": ".pixelproof",
+  "baseUrl": "http://127.0.0.1:6007",
+  "targets": {
+    "storybook": {
+      "url": "/",
+      "exclude": ["Widgets/ReportStatus/Loading"],
+      "themeGlobal": "theme"
+    }
+  },
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1024,
+      "height": 640
+    }
+  ],
+  "themes": ["light", "dark"],
+  "fullPage": true,
+  "failOn": "any"
+}

@@ -19,9 +19,12 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "demo": "node scripts/demo.js",
+    "build:site": "npm run build && npm run demo && npm run build -w @pixelproof/review",
     "e2e": "playwright test",
+    "visual": "node packages/cli/dist/bin.js test",
+    "visual:approve": "node packages/cli/dist/bin.js approve --all",
     "storybook": "npm run storybook -w @pixelproof/review",
-    "build-storybook": "npm run build-storybook -w @pixelproof/review",
+    "build-storybook": "npm run build-storybook -w @pixelproof/review --",
     "size:check": "node scripts/check-bundle-size.js",
     "lighthouse": "lhci autorun"
   },

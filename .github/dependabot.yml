@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    ignore:
+      # typescript-eslint supports TypeScript < 6.1; bump together once it widens its peer range.
+      - dependency-name: typescript
+        versions: ['>=6.1.0']
+      # Types track the Node major in "engines" and CI, not the latest Node release.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+    groups:
+      storybook:
+        patterns: ['storybook', '@storybook/*']
+      lint:
+        patterns: ['eslint*', '@eslint/*', '@vue/eslint-config-*', 'typescript-eslint', 'prettier', 'vue-tsc']
+      vue:
+        patterns: ['vue', 'vue-router', 'pinia', '@vitejs/plugin-vue', '@vue/*']
+      testing:
+        patterns:
+          ['vitest', '@vitest/*', '@testing-library/*', '@playwright/test', 'playwright', 'jsdom', '*axe*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
